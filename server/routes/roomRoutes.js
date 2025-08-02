@@ -33,3 +33,5 @@ router.get("/allRooms", async (req, res) => {
         res.status(500).json({error: "Can not display rooms."})
     }
     });
+
+module.exports = router;
