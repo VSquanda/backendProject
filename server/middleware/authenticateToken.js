@@ -49,6 +49,7 @@ const validateSession = async (req, res, next) => {
     }
 }
 
+// moved this to index.js to test with postman
 app.get('/api/health', (req, res) => {
     res.json({ status: 'ok' });
 })

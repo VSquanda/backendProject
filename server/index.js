@@ -22,6 +22,11 @@ app.get("/", (req, res) => {
   res.send("API is running successfully");
 });
 
+app.get("/api/health", (req, res) => {
+  res.json({ status: "ok" });
+});
+
+
 app.listen(PORT, () => {
   console.log("Server is running!");
 });
