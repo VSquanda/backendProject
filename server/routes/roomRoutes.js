@@ -23,7 +23,7 @@ router.get("/allRooms", async (req, res) => {
     
 
     //POST endpoint for creating a new room
-    router.get("/createRoom", async (req, res) => {
+    router.post("/createRoom", async (req, res) => {
     try {
 
      const { name, desciption, addedUsers, createdBy} = req.body;
