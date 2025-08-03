@@ -26,11 +26,22 @@ router.get("/allRooms", async (req, res) => {
     router.post("/createRoom", async (req, res) => {
     try {
 
-     const { name, desciption, addedUsers, createdBy} = req.body;
+     const { name, description, addedUsers, createdBy} = req.body;
+
+     if (!name || !description || !createdBy) {
+      return res.status(400).json({ message: "Missing required fields." });
+    }
+
+    const newRoom = new Room({
+        name,
+        description,
+        addedUsers,
+        createdBy,
+    });
 
     } catch (error) {
-        console.error("Error displaying all rooms", error);
-        res.status(500).json({error: "Can not display rooms."})
+        console.error("Error creating room", error);
+        res.status(500).json({error: "Can not create room."})
     }
     });
 
