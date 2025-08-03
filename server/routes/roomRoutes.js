@@ -1,11 +1,13 @@
 
 const User = require("../models/user");
-const router = require("express").Router();
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const Room = require("../models/room")
+const Room = require("../models/room");
+const router = require("express").Router();
+
+
 
 // GET endpoint for displaying ALL rooms
 
@@ -26,16 +28,14 @@ router.get("/allRooms", async (req, res) => {
         console.error("Error displaying all rooms", error);
         res.status(500).json({error: "Can not display rooms."})
     }
-    });
-    
+});
 
-    //POST endpoint for creating a new room
-    router.post("/createRoom", async (req, res) => {
-    try {
+//POST endpoint for creating a new room
+router.post("/createRoom", async (req, res) => {
+  try {
+    const { name, description, addedUsers, createdBy } = req.body;
 
-     const { name, description, addedUsers, createdBy} = req.body;
-
-     if (!name || !description || !createdBy) {
+    if (!name || !description || !createdBy) {
       return res.status(400).json({ message: "Missing required fields." });
     }
 
