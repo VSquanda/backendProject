@@ -5,7 +5,7 @@ dotenv.config();
 const PORT = process.env.PORT || 8080;
 const userRoutes = require("./routes/userRoutes");
 const roomsRoutes = require("./routes/roomRoutes");
-// const messageRoutes = require("./routes/messageRoutes");
+const messageRoutes = require("./routes/messageRoutes");
 const connectDB = require("./config/database");
 connectDB();
 
@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true })); // parses URL-encoded data
 
 app.use("/api/users", userRoutes);
 app.use("/api/rooms", roomsRoutes);
-// app.use("/api/messages", messageRoutes);
+app.use("/api/messages", messageRoutes);
 
 app.get("/", (req, res) => {
   res.send("API is running successfully");
@@ -25,7 +25,6 @@ app.get("/", (req, res) => {
 app.get("/api/health", (req, res) => {
   res.json({ status: "ok" });
 });
-
 
 app.listen(PORT, () => {
   console.log("Server is running!");
