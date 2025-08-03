@@ -3,6 +3,8 @@ const router = require("express").Router();
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 dotenv.config();
+const jwt = require("jsonwebtoken");
+
 // POST - /api/signup - create a new user
 router.post("/signup", async (req, res) => {
   try {
@@ -84,3 +86,5 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
+module.exports = router;
