@@ -45,6 +45,27 @@ router.post("/rooms/:roomId", async (req, res) => {
 // Update a message within a room endpoint
 router.put("/rooms/:roomId/:messageId", async (req, res) => {
   try {
+    const { roomId, messageId } = req.params;
+    const { body } = req.body;
+
+    if (!body) {
+      return res.status(400).json({ message: "Message body is required." });
+    }
+
+    const updatedMessage = await Message.findOneAndUpdate(
+      { _id: messageId, room: roomId },
+      { body },
+      { new: true }
+    );
+
+    if (!updatedMessage) {
+      return res.status(404).json({ message: "Message not found." });
+    }
+
+    res.status(200).json({
+      message: "Message updated successfully.",
+      result: updatedMessage,
+    });
   } catch (error) {
     console.error("Error updating message:", error);
     res.status(500).json({ error: "Internal server error" });
