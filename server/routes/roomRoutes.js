@@ -38,7 +38,9 @@ router.get("/allRooms", async (req, res) => {
         addedUsers,
         createdBy,
     });
-
+     await newRoom.save();
+    res.status(201).json({ message: "Room created successfully.", room: newRoom });
+    
     } catch (error) {
         console.error("Error creating room", error);
         res.status(500).json({error: "Can not create room."})
