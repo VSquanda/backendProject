@@ -11,15 +11,19 @@ const roomSchema = new mongoose.Schema(
     },
     addedUsers: [
       {
-        type: mongoose.Schema.Types.ObjectId,
+        //type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: "User",
       },
     ],
     createdBy: {
-      type: mongoose.Schema.Types.ObjectId,
+      // type: mongoose.Schema.Types.ObjectId,
+      type: String,
       ref: "User",
       required: true,
     },
   },
   { timestamps: true }
 );
+
+module.exports = mongoose.model("room", roomSchema)

@@ -1,18 +1,18 @@
-<<<<<<< HEAD
+
 const User = require("../models/user");
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 dotenv.config();
-=======
-const Room = require("../models/room");
-const router = require("express").Router();
+
+const Room = require("../models/room")
 
 // GET endpoint for displaying ALL rooms
 
 router.get("/allRooms", async (req, res) => {
     try {
        const foundRooms = await Room.find() 
+      
        if (foundRooms.length === 0) {
         return res.status(400).json ({
             message: "Could not find rooms.",
@@ -39,14 +39,14 @@ router.get("/allRooms", async (req, res) => {
       return res.status(400).json({ message: "Missing required fields." });
     }
 
-    const newRoom = new Room({
+    const newRoom = await Room.create({
         name,
         description,
         addedUsers,
         createdBy,
     });
      await newRoom.save();
-    res.status(201).json({ message: "Room created successfully.", room: newRoom });
+    res.status(201).json({ message: "Room created successfully.", result: newRoom });
     
     } catch (error) {
         console.error("Error creating room", error);
@@ -55,4 +55,3 @@ router.get("/allRooms", async (req, res) => {
     });
 
 module.exports = router;
->>>>>>> de90af5251763d83de417a16cdd805366002f022
