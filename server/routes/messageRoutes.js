@@ -54,10 +54,26 @@ router.put("/rooms/:roomId/:messageId", async (req, res) => {
 // Delete a message within a room endpoint
 router.delete("/rooms/:roomId/:messageId", async (req, res) => {
   try {
+    const { roomId, messageId } = req.params;
+
+    const deletedMessage = await Message.findOneAndDelete({
+      _id: messageId,
+      room: roomId,
+    });
+
+    if (!deletedMessage) {
+      return res.status(404).json({ message: "Message not found." });
+    }
+
+    res.status(200).json({
+      message: "Message deleted successfully.",
+      result: deletedMessage,
+    });
   } catch (error) {
     console.error("Error deleting message:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
 
 module.exports = router;
